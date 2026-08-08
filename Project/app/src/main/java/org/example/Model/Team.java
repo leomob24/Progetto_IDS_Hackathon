@@ -18,13 +18,7 @@ public class Team {
     @Column(nullable = false)
     private String nome;
 
-    // TODO: sostituire con la classe Utente quando sarà creata
-    @ManyToMany
-    @JoinTable(
-            name = "team_membri",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "utente_id")
-    )
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Utente> membri = new ArrayList<>();
 
     @ManyToMany

@@ -1,6 +1,8 @@
 package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
+import org.example.Model.State.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,11 +51,11 @@ public class Hackathon {
     // TODO: sostituire con la classe Staff quando sarà creata
     @ManyToOne
     @JoinColumn(name = "organizzatore_id", nullable = false)
-    private Staff organizzatore;
+    private Organizzatore organizzatore;
 
     @ManyToOne
     @JoinColumn(name = "giudice_id")
-    private Staff giudice;
+    private Giudice giudice;
 
     @ManyToMany
     @JoinTable(
@@ -61,11 +63,12 @@ public class Hackathon {
             joinColumns = @JoinColumn(name = "hackathon_id"),
             inverseJoinColumns = @JoinColumn(name = "mentore_id")
     )
-    private List<Staff> mentori = new ArrayList<>();
+    private List<Mentore> mentori = new ArrayList<>();
 
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Team> teamIscritti = new ArrayList<>();
 
+    /*
     // TODO: sostituire con la classe Sottomissione quando sarà creata
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sottomissione> sottomissioni = new ArrayList<>();
@@ -73,16 +76,21 @@ public class Hackathon {
     // TODO: sostituire con la classe Segnalazione quando sarà creata
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Segnalazione> segnalazioni = new ArrayList<>();
+    */
 
-    // TODO: implementare HackathonState con lo State Pattern
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Convert(converter = HackathonStateConverter.class)
+    @Column(name = "stato", nullable = false)
     private HackathonState stato;
+
+
+    public void iscriviTeam(Team team) {
+        stato.iscriviTeam(this, team);
+    }
 
     public Hackathon(String nome, String regolamento, String luogo, double premio,
                      int maxTeamSize, int maxTeamPartecipanti,
                      Date scadenzaIscrizioni, Date dataInizio, Date dataFine,
-                     Staff organizzatore) {
+                     Organizzatore organizzatore) {
         this.nome = nome;
         this.regolamento = regolamento;
         this.luogo = luogo;
@@ -93,7 +101,7 @@ public class Hackathon {
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.organizzatore = organizzatore;
-        this.stato = HackathonState.CREATO;
+        this.stato = new StatoInIscrizione();
     }
 
 }
