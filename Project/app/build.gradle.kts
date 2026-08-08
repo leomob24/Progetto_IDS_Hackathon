@@ -23,6 +23,15 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    // Hibernate
+    implementation("org.hibernate.orm:hibernate-core:6.2.7.Final")
+    // Jakarta
+    implementation("jakarta.persistence:jakarta.persistence-api:3.0.0")
+    // H2 database
+    implementation("com.h2database:h2:2.2.224")
+    // Lombok
+    implementation("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
