@@ -18,21 +18,23 @@ public class Team {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "team")
     private List<Utente> membri = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "team_hackathon",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "hackathon_id")
-    )
-    private List<Hackathon> hackathon = new ArrayList<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Invito> invitiInviati = new ArrayList<>();
 
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Iscrizione> iscritti = new ArrayList<>();
+
     public Team(String nome) {
         this.nome = nome;
+    }
+
+    public boolean addMembro(Utente membro) {
+        return membri.add(membro);
+    }
+    public boolean removeMembro(Utente membro) {
+        return membri.remove(membro);
     }
 }

@@ -1,6 +1,7 @@
 package org.example.Model;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -25,11 +26,18 @@ public abstract class Staff {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public Staff(String username, String nome, String cognome, String email) {
+    @Column(nullable = false)
+    private String password;
+
+    public Staff(String username, String nome, String cognome, String email, String password) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.password = password;
+    }
+    public boolean VerificaPassword(String password){
+        return this.password.equals(password);
     }
 
 }

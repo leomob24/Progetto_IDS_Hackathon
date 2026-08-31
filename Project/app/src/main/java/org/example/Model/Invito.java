@@ -20,7 +20,6 @@ public class Invito {
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
-    // TODO: sostituire con la classe Utente quando sarà creata
     @ManyToOne
     @JoinColumn(name = "utente_id", nullable = false)
     private Utente utente;

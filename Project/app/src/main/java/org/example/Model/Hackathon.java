@@ -3,6 +3,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import org.example.Model.State.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,10 +29,7 @@ public class Hackathon {
     private String luogo;
 
     @Column(nullable = false)
-    private double premio;
-
-    @Column(nullable = false)
-    private int maxTeamSize;
+    private BigDecimal premio;
 
     @Column(nullable = false)
     private int maxTeamPartecipanti;
@@ -66,7 +64,7 @@ public class Hackathon {
     private List<Mentore> mentori = new ArrayList<>();
 
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Team> teamIscritti = new ArrayList<>();
+    private List<Iscrizione> teamIscritti = new ArrayList<>();
 
     /*
     // TODO: sostituire con la classe Sottomissione quando sarà creata
@@ -87,15 +85,14 @@ public class Hackathon {
         stato.iscriviTeam(this, team);
     }
 
-    public Hackathon(String nome, String regolamento, String luogo, double premio,
-                     int maxTeamSize, int maxTeamPartecipanti,
+    public Hackathon(String nome, String regolamento, String luogo, BigDecimal premio,
+                     int maxTeamPartecipanti,
                      Date scadenzaIscrizioni, Date dataInizio, Date dataFine,
                      Organizzatore organizzatore) {
         this.nome = nome;
         this.regolamento = regolamento;
         this.luogo = luogo;
         this.premio = premio;
-        this.maxTeamSize = maxTeamSize;
         this.maxTeamPartecipanti = maxTeamPartecipanti;
         this.scadenzaIscrizioni = scadenzaIscrizioni;
         this.dataInizio = dataInizio;

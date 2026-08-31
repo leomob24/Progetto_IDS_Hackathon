@@ -46,5 +46,8 @@ public class Utente {
         this.nome = nome;
         this.cognome = cognome;
     }
+    public boolean VerificaPassword(String password){
+        return this.password.equals(password);
+    }
 }
 
