@@ -10,7 +10,7 @@ import lombok.*;
 @Table(name = "organizzatore")
 public class Organizzatore extends Staff {
 
-    public Organizzatore(String username, String nome, String cognome, String email) {
-        super(username, nome, cognome, email);
+    public Organizzatore(String username, String nome, String cognome, String email, String password) {
+        super(username, nome, cognome, email, password);
     }
 }

@@ -1,11 +1,13 @@
-package org.example.Model;
+package org.example.Model.builder;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.example.Model.*;
 import org.example.Model.State.HackathonState;
 
-public class ConcreteHackathonBuilder implements HackathonBuilder{
+public class ConcreteHackathonBuilder implements HackathonBuilder {
     private Hackathon hackathon;
     @Override
     public void reset() {

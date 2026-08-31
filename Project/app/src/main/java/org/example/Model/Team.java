@@ -27,6 +27,9 @@ public class Team {
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Iscrizione> iscritti = new ArrayList<>();
 
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Segnalazione> segnalazioni = new ArrayList<>();
+
     public Team(String nome) {
         this.nome = nome;
     }

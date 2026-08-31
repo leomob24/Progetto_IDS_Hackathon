@@ -46,7 +46,6 @@ public class Hackathon {
     @Column(nullable = false)
     private Date dataFine;
 
-    // TODO: sostituire con la classe Staff quando sarà creata
     @ManyToOne
     @JoinColumn(name = "organizzatore_id", nullable = false)
     private Organizzatore organizzatore;
@@ -66,15 +65,11 @@ public class Hackathon {
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Iscrizione> teamIscritti = new ArrayList<>();
 
-    /*
-    // TODO: sostituire con la classe Sottomissione quando sarà creata
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sottomissione> sottomissioni = new ArrayList<>();
 
-    // TODO: sostituire con la classe Segnalazione quando sarà creata
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Segnalazione> segnalazioni = new ArrayList<>();
-    */
 
     @Convert(converter = HackathonStateConverter.class)
     @Column(name = "stato", nullable = false)

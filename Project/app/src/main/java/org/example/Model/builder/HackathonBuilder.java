@@ -1,7 +1,9 @@
-package org.example.Model;
+package org.example.Model.builder;
 import java.util.List;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.example.Model.*;
 import org.example.Model.State.HackathonState;
 
 public interface HackathonBuilder {
