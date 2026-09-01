@@ -34,6 +34,9 @@ public class Hackathon {
     @Column(nullable = false)
     private int maxTeamPartecipanti;
 
+    @Column(nullable = false)
+    private boolean premioErogato;
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date scadenzaIscrizioni;
@@ -53,6 +56,10 @@ public class Hackathon {
     @ManyToOne
     @JoinColumn(name = "giudice_id")
     private Giudice giudice;
+
+    @ManyToOne
+    @JoinColumn(name = "team_vincitore_id")
+    private Team teamVincitore;
 
     @ManyToMany
     @JoinTable(
@@ -76,8 +83,13 @@ public class Hackathon {
     private HackathonState stato;
 
 
+
     public void iscriviTeam(Team team) {
         stato.iscriviTeam(this, team);
+    }
+
+    public boolean addMentori (List<Mentore> mentori){
+        return this.mentori.addAll(mentori);
     }
 
     public Hackathon(String nome, String regolamento, String luogo, BigDecimal premio,

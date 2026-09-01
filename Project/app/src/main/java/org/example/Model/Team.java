@@ -25,10 +25,13 @@ public class Team {
     private List<Invito> invitiInviati = new ArrayList<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Iscrizione> iscritti = new ArrayList<>();
+    private List<Iscrizione> iscrizioni = new ArrayList<>();
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Segnalazione> segnalazioni = new ArrayList<>();
+
+    @OneToMany(mappedBy = "teamVincitore")
+    private List<Hackathon> hackathon = new ArrayList<>();
 
     public Team(String nome) {
         this.nome = nome;
@@ -39,5 +42,8 @@ public class Team {
     }
     public boolean removeMembro(Utente membro) {
         return membri.remove(membro);
+    }
+    public int getNumMembri(){
+        return membri.size();
     }
 }
