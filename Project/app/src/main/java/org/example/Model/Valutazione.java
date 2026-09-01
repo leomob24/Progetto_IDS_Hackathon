@@ -23,6 +23,6 @@ public class Valutazione {
     private Date dataValutazione;
 
     @OneToOne
-    @JoinColumn(name = "sottomissione_id", nullable = false)
+    @JoinColumn(name = "sottomissione_id", nullable = false, unique = true)
     private Sottomissione sottomissione;
 }

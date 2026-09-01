@@ -10,13 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "organizzatore")
-public class Organizzatore extends Staff {
+@DiscriminatorValue("ORGANIZZATORE")
+public class Organizzatore extends RuoloStaff {
 
-    @OneToMany(mappedBy = "organizzatore")
-    private List<Hackathon> hackathon = new ArrayList<>();
-
-    public Organizzatore(String username, String nome, String cognome, String email, String password) {
-        super(username, nome, cognome, email, password);
+    public Organizzatore(Staff staff, Hackathon hackathon) {
+        super(staff, hackathon);
     }
+
 }

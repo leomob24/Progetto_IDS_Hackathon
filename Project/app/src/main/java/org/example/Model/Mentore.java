@@ -10,15 +10,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "mentore")
-public class Mentore extends Staff {
+@DiscriminatorValue("MENTORE")
+public class Mentore extends RuoloStaff {
     @OneToMany(mappedBy = "mentore", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Segnalazione> segnalazioni = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "mentori")
-    private List<Hackathon> hackathon = new ArrayList<>();
-
-    public Mentore(String username, String nome, String cognome, String email, String password) {
-        super(username, nome, cognome, email, password);
+    public Mentore(Staff staff, Hackathon hackathon) {
+        super(staff, hackathon);
     }
 }

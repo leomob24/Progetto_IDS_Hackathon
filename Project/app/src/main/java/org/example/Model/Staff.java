@@ -7,9 +7,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "staff")
-public abstract class Staff {
+public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,6 +25,7 @@ public abstract class Staff {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Setter(AccessLevel.NONE)
     @Column(nullable = false)
     private String password;
 

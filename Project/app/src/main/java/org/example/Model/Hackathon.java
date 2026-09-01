@@ -50,24 +50,8 @@ public class Hackathon {
     private Date dataFine;
 
     @ManyToOne
-    @JoinColumn(name = "organizzatore_id", nullable = false)
-    private Organizzatore organizzatore;
-
-    @ManyToOne
-    @JoinColumn(name = "giudice_id")
-    private Giudice giudice;
-
-    @ManyToOne
     @JoinColumn(name = "team_vincitore_id")
     private Team teamVincitore;
-
-    @ManyToMany
-    @JoinTable(
-            name = "hackathon_mentori",
-            joinColumns = @JoinColumn(name = "hackathon_id"),
-            inverseJoinColumns = @JoinColumn(name = "mentore_id")
-    )
-    private List<Mentore> mentori = new ArrayList<>();
 
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Iscrizione> teamIscritti = new ArrayList<>();
@@ -88,14 +72,10 @@ public class Hackathon {
         stato.iscriviTeam(this, team);
     }
 
-    public boolean addMentori (List<Mentore> mentori){
-        return this.mentori.addAll(mentori);
-    }
 
     public Hackathon(String nome, String regolamento, String luogo, BigDecimal premio,
                      int maxTeamPartecipanti,
-                     Date scadenzaIscrizioni, Date dataInizio, Date dataFine,
-                     Organizzatore organizzatore) {
+                     Date scadenzaIscrizioni, Date dataInizio, Date dataFine) {
         this.nome = nome;
         this.regolamento = regolamento;
         this.luogo = luogo;
@@ -104,7 +84,6 @@ public class Hackathon {
         this.scadenzaIscrizioni = scadenzaIscrizioni;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
-        this.organizzatore = organizzatore;
         this.stato = new StatoInIscrizione();
     }
 

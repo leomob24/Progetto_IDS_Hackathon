@@ -29,6 +29,14 @@ public class Sottomissione {
     @JoinColumn(name = "iscrizione_id", nullable = false)
     private Iscrizione iscrizione;
 
-    @OneToOne(mappedBy = "valutazione_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "sottomissione", cascade = CascadeType.ALL, orphanRemoval = true)
     private Valutazione valutazione;
+
+    public Sottomissione(String titolo, String descrizione, String linkRepository, long iscrizione_id){
+        this.Titolo = titolo;
+        this.Descrizione = descrizione;
+        this.linkRepository = linkRepository;
+        this.dataInvio = new Date();
+        this.iscrizione = getIscrizione();
+    }
 }
