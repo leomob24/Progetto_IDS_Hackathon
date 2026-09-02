@@ -1,6 +1,8 @@
 package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
+import org.example.dto.DatiValutazione;
+
 import java.util.Date;
 
 @NoArgsConstructor
@@ -26,4 +28,10 @@ public class Valutazione {
     @OneToOne
     @JoinColumn(name = "sottomissione_id", nullable = false, unique = true)
     private Sottomissione sottomissione;
+
+    public Valutazione(DatiValutazione datiValutazione) {
+        this.punteggio = datiValutazione.getPunteggio();
+        this.giudizio = datiValutazione.getGiudizio();
+        this.dataValutazione = new Date();
+    }
 }

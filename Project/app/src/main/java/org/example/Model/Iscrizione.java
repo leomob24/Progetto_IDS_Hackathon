@@ -3,7 +3,6 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
-
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Getter
@@ -32,4 +31,10 @@ public class Iscrizione {
 
     @OneToMany(mappedBy = "iscrizione", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RichiestaDiSupporto> richiesteDiSupportoList;
+
+    public Iscrizione(Team team, Hackathon hackathon) {
+        this.team = team;
+        this.hackathon = hackathon;
+        this.dataIscrizione = new Date();
+    }
 }

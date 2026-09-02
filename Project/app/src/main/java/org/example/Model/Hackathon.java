@@ -2,6 +2,8 @@ package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
 import org.example.Model.State.*;
+import org.example.dto.DatiHackathon;
+import org.example.dto.DatiValutazione;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -73,18 +75,41 @@ public class Hackathon {
         stato.iscriviTeam(this, team);
     }
 
+    public void avviaHackathon() {
+        stato.avviaHackathon(this);
+    }
 
-    public Hackathon(String nome, String regolamento, String luogo, BigDecimal premio,
-                     int maxTeamPartecipanti,
-                     Date scadenzaIscrizioni, Date dataInizio, Date dataFine) {
-        this.nome = nome;
-        this.regolamento = regolamento;
-        this.luogo = luogo;
-        this.premio = premio;
-        this.maxTeamPartecipanti = maxTeamPartecipanti;
-        this.scadenzaIscrizioni = scadenzaIscrizioni;
-        this.dataInizio = dataInizio;
-        this.dataFine = dataFine;
+    public void valutaHackathon(Team team) {
+        stato.valutaHackathon(this, team);
+    }
+
+    public void concludiHackathon() {
+        stato.concludiHackathon(this);
+    }
+
+    public void proclamaVincitore(Team team) {
+        stato.proclamaVincitore(this, team);
+    }
+    public void giudicaSottomissione(Sottomissione sottomissione, DatiValutazione datiValutazione) {
+        stato.giudicaSottomissione(this, sottomissione, datiValutazione);
+    }
+    public void aggiungiSegnalazione(Segnalazione segnalazione) {
+        stato.aggiungiSegnalazione(this, segnalazione);
+    }
+    public void squalificaTeam(Segnalazione segnalazione) {
+        stato.squalificaTeam(this, segnalazione);
+    }
+
+
+    public Hackathon(DatiHackathon datiHackathon) {
+        this.nome = datiHackathon.getNome();
+        this.regolamento = datiHackathon.getRegolamento();
+        this.luogo = datiHackathon.getLuogo();
+        this.premio = datiHackathon.getPremio();
+        this.maxTeamPartecipanti = datiHackathon.getMaxTeamPartecipanti();
+        this.scadenzaIscrizioni = datiHackathon.getScadenzaIscrizioni();
+        this.dataInizio = datiHackathon.getDataInizio();
+        this.dataFine = datiHackathon.getDataFine();
         this.stato = new StatoInIscrizione();
     }
 
