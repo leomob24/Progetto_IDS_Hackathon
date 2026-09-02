@@ -8,6 +8,9 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("org.springframework.boot") version "3.3.0"
+    id("io.spring.dependency-management") version "1.1.5"
+    java
 }
 
 repositories {
@@ -23,12 +26,11 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
-    // Hibernate
-    implementation("org.hibernate.orm:hibernate-core:6.2.7.Final")
-    // Jakarta
-    implementation("jakarta.persistence:jakarta.persistence-api:3.0.0")
-    // H2 database
-    implementation("com.h2database:h2:2.2.224")
+    //Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.h2database:h2")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
     // Lombok
     implementation("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")

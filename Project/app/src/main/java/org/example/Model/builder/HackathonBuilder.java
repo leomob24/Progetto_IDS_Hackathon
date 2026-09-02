@@ -16,9 +16,6 @@ public interface HackathonBuilder {
     void setScadenzaIscrizioni(Date data);
     void setDataInizio(Date data);
     void setDataFine(Date data);
-    void setOrganizzatore(Organizzatore organizzatore);
-    void setGiudice(Giudice giudice);
-    void setMentori(List<Mentore> mentori);
     void setTeamIscritti(List<Iscrizione> teamIscritti);
     void setSottomissioni(List<Sottomissione> sottomissioni);
     void setSegnalazioni(List<Segnalazione> segnalazioni);

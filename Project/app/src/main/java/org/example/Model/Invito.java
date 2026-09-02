@@ -1,11 +1,13 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Entity

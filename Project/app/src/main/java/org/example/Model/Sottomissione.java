@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Entity
@@ -32,11 +33,10 @@ public class Sottomissione {
     @OneToOne(mappedBy = "sottomissione", cascade = CascadeType.ALL, orphanRemoval = true)
     private Valutazione valutazione;
 
-    public Sottomissione(String titolo, String descrizione, String linkRepository, long iscrizione_id){
+    public Sottomissione(String titolo, String descrizione, String linkRepository){
         this.Titolo = titolo;
         this.Descrizione = descrizione;
         this.linkRepository = linkRepository;
         this.dataInvio = new Date();
-        this.iscrizione = getIscrizione();
     }
 }

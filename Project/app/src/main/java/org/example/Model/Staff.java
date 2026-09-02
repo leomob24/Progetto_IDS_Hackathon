@@ -4,6 +4,7 @@ import lombok.*;
 import java.util.List;
 
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Entity

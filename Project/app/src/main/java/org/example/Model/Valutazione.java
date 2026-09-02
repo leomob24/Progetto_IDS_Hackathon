@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Entity

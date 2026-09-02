@@ -46,18 +46,6 @@ public class ConcreteHackathonBuilder implements HackathonBuilder {
         this.hackathon.setDataFine(data);
     }
     @Override
-    public void setOrganizzatore(Organizzatore organizzatore){
-        this.hackathon.setOrganizzatore(organizzatore);
-    }
-    @Override
-    public void setGiudice(Giudice giudice){
-        this.hackathon.setGiudice(giudice);
-    }
-    @Override
-    public void setMentori(List<Mentore> mentori){
-        this.hackathon.setMentori(mentori);
-    }
-    @Override
     public void setTeamIscritti(List<Iscrizione> teamIscritti){
         this.hackathon.setTeamIscritti(teamIscritti);
     }

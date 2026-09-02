@@ -6,9 +6,10 @@ import lombok.*;
 @Entity
 @Table(name = "ruolo_staff")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "ruolo_staff", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "ruolo", discriminatorType = DiscriminatorType.STRING)
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 public abstract class RuoloStaff {
     @Id

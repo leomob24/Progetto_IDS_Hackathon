@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Entity
@@ -24,7 +25,7 @@ public class Segnalazione {
     private EsitoSegnalazione esito = EsitoSegnalazione.PENDENTE;
 
     @ManyToOne
-    @JoinColumn(name = "sottomissione_id", nullable = false)
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
     @ManyToOne

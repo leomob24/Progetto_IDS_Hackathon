@@ -7,6 +7,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(of = "id")
 @Table(name = "richiesta_di_supporto")
 public class RichiestaDiSupporto {
     @Id
