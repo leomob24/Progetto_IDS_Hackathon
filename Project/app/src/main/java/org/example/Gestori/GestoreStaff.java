@@ -1,11 +1,12 @@
 package org.example.Gestori;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.Model.*;
+import org.example.Repository.RepositoryHackathon;
 import org.example.Repository.RepositoryRuoloStaff;
 import org.example.Repository.RepositoryStaff;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,13 @@ import java.util.stream.Collectors;
 public class GestoreStaff {
     private final RepositoryStaff repositoryStaff;
     private final RepositoryRuoloStaff repositoryRuoloStaff;
-    @Transactional
-    public List<Staff> getMentoriNonAssegnati(Hackathon hackathon){
+    private final RepositoryHackathon repositoryHackathon;
+
+    @Transactional(readOnly = true)
+    public List<Staff> getMentoriNonAssegnati(long hackathonId){
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+
         List<Staff> membriStaff = repositoryStaff.findAll();
         List<Mentore> mentoriAssegnati = repositoryRuoloStaff.recuperaMentoriHackathon(hackathon);
 
@@ -30,12 +36,25 @@ public class GestoreStaff {
                 .filter(s -> !idGiaAssegnati.contains(s.getId()))
                 .collect(Collectors.toList());
     }
-    @Transactional
-    public List<Hackathon> getHackathonAssegnati(Staff staff){
+
+    /*
+    * getHackathonAssegnati restituisce la lista degli hackathon a cui un certo membro staff
+    * ha un qualsiasi ruolo (Giudice, Organizzatore o Mentore).
+    */
+    @Transactional(readOnly = true)
+    public List<Hackathon> getHackathonAssegnati(long staffId){
+        Staff staff = repositoryStaff.findById(staffId)
+                .orElseThrow(() -> new IllegalArgumentException("Staff non trovato"));
         return repositoryRuoloStaff.recuperaHackathonAssegnati(staff);
     }
+
     @Transactional
-    public Giudice assegnaGiudice(Staff staff, Hackathon hackathon){
+    public Giudice assegnaGiudice(long staffId, long hackathonId){
+        Staff staff = repositoryStaff.findById(staffId)
+                .orElseThrow(() -> new IllegalArgumentException("Staff non trovato"));
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+
         if (repositoryRuoloStaff.recuperaGiudiceHackathon(hackathon).isPresent()) {
             throw new IllegalStateException("L'hackathon ha già un giudice assegnato");
         }
@@ -43,8 +62,14 @@ public class GestoreStaff {
         Giudice giudice = new Giudice(staff, hackathon);
         return repositoryRuoloStaff.save(giudice);
     }
+
     @Transactional
-    public Organizzatore assegnaOrganizzatore(Staff staff, Hackathon hackathon) {
+    public Organizzatore assegnaOrganizzatore(long staffId, long hackathonId) {
+        Staff staff = repositoryStaff.findById(staffId)
+                .orElseThrow(() -> new IllegalArgumentException("Staff non trovato"));
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+
         if (repositoryRuoloStaff.recuperaOrganizzatoreHackathon(hackathon).isPresent()) {
             throw new IllegalStateException("L'hackathon ha già un organizzatore assegnato");
         }
@@ -52,10 +77,16 @@ public class GestoreStaff {
         Organizzatore organizzatore = new Organizzatore(staff, hackathon);
         return repositoryRuoloStaff.save(organizzatore);
     }
+
     @Transactional
-    public List<Mentore> assegnaMentore(List<Staff> staffList, Hackathon hackathon){
+    public List<Mentore> assegnaMentore(List<Long> staffIds, long hackathonId){
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+
         List<Mentore> mentoriAssegnati = new ArrayList<>();
-        for (Staff staff : staffList) {
+        for (Long staffId : staffIds) {
+            Staff staff = repositoryStaff.findById(staffId)
+                    .orElseThrow(() -> new IllegalArgumentException("Staff non trovato: " + staffId));
             giaAssegnatoHackathon(staff, hackathon);
             Mentore mentore = new Mentore(staff, hackathon);
             repositoryRuoloStaff.save(mentore);
@@ -63,6 +94,7 @@ public class GestoreStaff {
         }
         return mentoriAssegnati;
     }
+
     private void giaAssegnatoHackathon(Staff staff, Hackathon hackathon){
         if(repositoryRuoloStaff.recuperaHackathonAssegnati(staff).contains(hackathon)){
             throw new IllegalArgumentException("Membro Staff ha gia un ruolo nell'hackathon");

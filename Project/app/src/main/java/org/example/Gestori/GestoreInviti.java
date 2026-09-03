@@ -1,9 +1,12 @@
 package org.example.Gestori;
-import org.example.Model.Utente;
-import org.example.Model.Team;
+
+import lombok.RequiredArgsConstructor;
 import org.example.Model.Invito;
-import lombok.*;
+import org.example.Model.Team;
+import org.example.Model.Utente;
 import org.example.Repository.RepositoryInviti;
+import org.example.Repository.RepositoryTeam;
+import org.example.Repository.RepositoryUtenti;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class GestoreInviti {
 
     private final RepositoryInviti repositoryInviti;
+    private final RepositoryUtenti repositoryUtenti;
+    private final RepositoryTeam repositoryTeam;
 
     @Transactional
-    public Invito invita(Utente utente, Team team) {
+    public Invito invita(long utenteId, long teamId) {
+        Utente utente = repositoryUtenti.findById(utenteId)
+                .orElseThrow(() -> new IllegalArgumentException("Utente non trovato"));
+        Team team = repositoryTeam.findById(teamId)
+                .orElseThrow(() -> new IllegalArgumentException("Team non trovato"));
+
         if(utente.getTeam() != null){
             throw new IllegalArgumentException("Utente già appartente ad un team");
         }
@@ -25,6 +35,4 @@ public class GestoreInviti {
         repositoryInviti.save(invito);
         return invito;
     }
-
-
 }

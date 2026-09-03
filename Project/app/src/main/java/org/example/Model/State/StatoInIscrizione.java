@@ -2,6 +2,8 @@ package org.example.Model.State;
 import org.example.Model.*;
 import org.example.dto.DatiValutazione;
 
+import java.util.Date;
+
 
 public class StatoInIscrizione implements HackathonState{
     @Override
@@ -19,11 +21,14 @@ public class StatoInIscrizione implements HackathonState{
 
     @Override
     public void avviaHackathon(Hackathon hackathon) {
+        if (new Date().before(hackathon.getDataInizio())) {
+            throw new IllegalStateException("Non è ancora la data di inizio dell'hackathon!");
+        }
         hackathon.setStato(new StatoInCorso());
     }
 
     @Override
-    public void valutaHackathon(Hackathon hackathon, Team team) {
+    public void valutaHackathon(Hackathon hackathon) {
         throw new IllegalStateException("L'hackathon non è ancora iniziato!");
 
     }

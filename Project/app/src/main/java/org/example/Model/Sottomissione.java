@@ -1,6 +1,8 @@
 package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
+import org.example.dto.DatiSottomissione;
+
 import java.util.Date;
 
 @NoArgsConstructor
@@ -37,6 +39,12 @@ public class Sottomissione {
         this.Titolo = titolo;
         this.Descrizione = descrizione;
         this.linkRepository = linkRepository;
+        this.dataInvio = new Date();
+    }
+    public Sottomissione(DatiSottomissione datiSottomissione){
+        this.Titolo = datiSottomissione.getTitolo();
+        this.Descrizione = datiSottomissione.getDescrizione();
+        this.linkRepository = datiSottomissione.getLinkRepository();
         this.dataInvio = new Date();
     }
 }

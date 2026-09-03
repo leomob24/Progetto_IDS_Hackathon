@@ -5,7 +5,7 @@ import org.example.dto.DatiValutazione;
 public interface HackathonState {
     void iscriviTeam(Hackathon hackathon, Team team);
     void avviaHackathon(Hackathon hackathon);
-    void valutaHackathon(Hackathon hackathon, Team team);
+    void valutaHackathon(Hackathon hackathon);
     void concludiHackathon(Hackathon hackathon);
     void proclamaVincitore(Hackathon hackathon, Team team);
     void giudicaSottomissione(Hackathon hackathon, Sottomissione sottomissione, DatiValutazione datiValutazione);

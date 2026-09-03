@@ -54,10 +54,6 @@ public class ConcreteHackathonBuilder implements HackathonBuilder {
         this.hackathon.setStato(stato);
     }
     @Override
-    public void setSottomissioni(List<Sottomissione> sottomissioni){
-        this.hackathon.setSottomissioni(sottomissioni);
-    }
-    @Override
     public void setSegnalazioni(List<Segnalazione> segnalazioni){
         this.hackathon.setSegnalazioni(segnalazioni);
     }

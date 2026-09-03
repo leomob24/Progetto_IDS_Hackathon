@@ -60,16 +60,11 @@ public class Hackathon {
     private List<Iscrizione> teamIscritti = new ArrayList<>();
 
     @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Sottomissione> sottomissioni = new ArrayList<>();
-
-    @OneToMany(mappedBy = "hackathon", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Segnalazione> segnalazioni = new ArrayList<>();
 
     @Convert(converter = HackathonStateConverter.class)
     @Column(name = "stato", nullable = false)
     private HackathonState stato;
-
-
 
     public void iscriviTeam(Team team) {
         stato.iscriviTeam(this, team);
@@ -79,8 +74,8 @@ public class Hackathon {
         stato.avviaHackathon(this);
     }
 
-    public void valutaHackathon(Team team) {
-        stato.valutaHackathon(this, team);
+    public void valutaHackathon() {
+        stato.valutaHackathon(this);
     }
 
     public void concludiHackathon() {
@@ -90,16 +85,18 @@ public class Hackathon {
     public void proclamaVincitore(Team team) {
         stato.proclamaVincitore(this, team);
     }
+
     public void giudicaSottomissione(Sottomissione sottomissione, DatiValutazione datiValutazione) {
         stato.giudicaSottomissione(this, sottomissione, datiValutazione);
     }
+
     public void aggiungiSegnalazione(Segnalazione segnalazione) {
         stato.aggiungiSegnalazione(this, segnalazione);
     }
+
     public void squalificaTeam(Segnalazione segnalazione) {
         stato.squalificaTeam(this, segnalazione);
     }
-
 
     public Hackathon(DatiHackathon datiHackathon) {
         this.nome = datiHackathon.getNome();
@@ -112,5 +109,4 @@ public class Hackathon {
         this.dataFine = datiHackathon.getDataFine();
         this.stato = new StatoInIscrizione();
     }
-
 }

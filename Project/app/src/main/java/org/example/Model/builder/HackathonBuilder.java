@@ -17,7 +17,6 @@ public interface HackathonBuilder {
     void setDataInizio(Date data);
     void setDataFine(Date data);
     void setTeamIscritti(List<Iscrizione> teamIscritti);
-    void setSottomissioni(List<Sottomissione> sottomissioni);
     void setSegnalazioni(List<Segnalazione> segnalazioni);
     void setStato(HackathonState stato);
     Hackathon build();

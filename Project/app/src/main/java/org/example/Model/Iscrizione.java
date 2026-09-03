@@ -1,6 +1,8 @@
 package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @NoArgsConstructor
@@ -30,7 +32,7 @@ public class Iscrizione {
     private Sottomissione sottomissione;
 
     @OneToMany(mappedBy = "iscrizione", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RichiestaDiSupporto> richiesteDiSupportoList;
+    private List<RichiestaDiSupporto> richiesteDiSupportoList = new ArrayList<>();;
 
     public Iscrizione(Team team, Hackathon hackathon) {
         this.team = team;

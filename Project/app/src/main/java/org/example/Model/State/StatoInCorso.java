@@ -16,7 +16,7 @@ public class StatoInCorso implements HackathonState {
     }
 
     @Override
-    public void valutaHackathon(Hackathon hackathon, Team team) {
+    public void valutaHackathon(Hackathon hackathon) {
         hackathon.setStato(new StatoInValutazione());
     }
 

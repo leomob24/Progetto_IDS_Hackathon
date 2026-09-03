@@ -15,7 +15,7 @@ public class StatoConcluso implements HackathonState {
     }
 
     @Override
-    public void valutaHackathon(Hackathon hackathon, Team team) {
+    public void valutaHackathon(Hackathon hackathon) {
         throw new IllegalStateException("L'hackathon è concluso!");
     }
 

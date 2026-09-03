@@ -1,6 +1,7 @@
 package org.example.Repository;
 
 import org.example.Model.Hackathon;
+import org.example.Model.Team;
 import org.example.Model.Sottomissione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,7 @@ public interface RepositorySottomissioni extends JpaRepository<Sottomissione, Lo
 
     @Query("select s from Sottomissione s where s.iscrizione.hackathon = :hackathon")
     List<Sottomissione> recuperaSottomissioni(@Param("hackathon") Hackathon hackathon);
+
+    @Query("select s from Sottomissione s where s.iscrizione.team = :team and s.iscrizione.hackathon = :hackathon")
+    Sottomissione getSottomissione(@Param("team") Team team, @Param("hackathon") Hackathon hackathon);
 }

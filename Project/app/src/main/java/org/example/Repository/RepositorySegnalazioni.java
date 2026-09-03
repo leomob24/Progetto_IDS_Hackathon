@@ -10,5 +10,4 @@ import java.util.List;
 
 public interface RepositorySegnalazioni extends JpaRepository<Segnalazione, Long> {
     List<Segnalazione> findByHackathon(Hackathon hackathon);
-    Optional<Segnalazione> findById (Segnalazione segnalazione);
 }
