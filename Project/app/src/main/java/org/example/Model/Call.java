@@ -1,6 +1,7 @@
 package org.example.Model;
 import lombok.*;
 import jakarta.persistence.*;
+import org.example.dto.DatiCall;
 
 import java.util.Date;
 
@@ -26,4 +27,10 @@ public class Call {
     @OneToOne
     @JoinColumn(name = "richiesta_di_supporto_id", nullable = false)
     private RichiestaDiSupporto richiestaDiSupporto;
+
+    public Call(DatiCall datiCall){
+        this.dataCall = datiCall.getData();
+        this.durataMinuti = datiCall.getDurata();
+        this.linkCall = datiCall.getLink();
+    }
 }

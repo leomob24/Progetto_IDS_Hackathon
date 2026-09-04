@@ -98,15 +98,4 @@ public class Hackathon {
         stato.squalificaTeam(this, segnalazione);
     }
 
-    public Hackathon(DatiHackathon datiHackathon) {
-        this.nome = datiHackathon.getNome();
-        this.regolamento = datiHackathon.getRegolamento();
-        this.luogo = datiHackathon.getLuogo();
-        this.premio = datiHackathon.getPremio();
-        this.maxTeamPartecipanti = datiHackathon.getMaxTeamPartecipanti();
-        this.scadenzaIscrizioni = datiHackathon.getScadenzaIscrizioni();
-        this.dataInizio = datiHackathon.getDataInizio();
-        this.dataFine = datiHackathon.getDataFine();
-        this.stato = new StatoInIscrizione();
-    }
 }

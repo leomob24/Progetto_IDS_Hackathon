@@ -1,4 +1,4 @@
-package org.example.ServiziEsterni;
+package org.example.ServiziEsterni.AdapterCalendar;
 
 
 import org.example.dto.CalendarEvent;

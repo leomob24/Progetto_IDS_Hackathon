@@ -19,6 +19,9 @@ public class Team {
     @Column(nullable = false)
     private String nome;
 
+    @Column
+    private String iban;
+
     @OneToMany(mappedBy = "team")
     private List<Utente> membri = new ArrayList<>();
 

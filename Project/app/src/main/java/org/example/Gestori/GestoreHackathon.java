@@ -3,6 +3,7 @@ package org.example.Gestori;
 import lombok.RequiredArgsConstructor;
 import org.example.Model.Hackathon;
 import org.example.Model.Iscrizione;
+import org.example.Model.State.StatoConcluso;
 import org.example.Model.State.StatoInIscrizione;
 import org.example.Model.Team;
 import org.example.Model.builder.ConcreteHackathonBuilder;
@@ -10,6 +11,7 @@ import org.example.Model.builder.HackathonBuilder;
 import org.example.Repository.RepositoryHackathon;
 import org.example.Repository.RepositoryRuoloStaff;
 import org.example.Repository.RepositoryTeam;
+import org.example.ServiziEsterni.ServizioPagamento;
 import org.example.dto.DatiHackathon;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ public class GestoreHackathon {
     private final RepositoryHackathon repositoryHackathon;
     private final RepositoryRuoloStaff repositoryRuoloStaff;
     private final RepositoryTeam repositoryTeam;
+    private final ServizioPagamento servizioPagamento;
 
     @Transactional
     public Hackathon creaHackathon(DatiHackathon datiHackathon) {
@@ -76,6 +79,35 @@ public class GestoreHackathon {
         hackathon.proclamaVincitore(team);
         repositoryHackathon.save(hackathon);
         return team;
+    }
+
+    /*
+    * erogaPremio effettua, tramite il sistema di pagamento esterno, il versamento del premio al team vincitore
+    * di un hackathon concluso, e marca il premio come erogato. Non fa parte della macchina a stati
+    * dell'hackathon: è un'azione singola, eseguibile una sola volta, successiva alla conclusione.
+    */
+    @Transactional
+    public String erogaPremio(long hackathonId) {
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+
+        if (!(hackathon.getStato() instanceof StatoConcluso)) {
+            throw new IllegalStateException("Il premio può essere erogato solo ad un hackathon concluso!");
+        }
+        if (hackathon.isPremioErogato()) {
+            throw new IllegalStateException("Il premio è già stato erogato!");
+        }
+        if (hackathon.getTeamVincitore() == null) {
+            throw new IllegalStateException("Non è stato ancora proclamato un vincitore!");
+        }
+
+        // se il pagamento fallisce, servizioPagamento lancia un'eccezione;
+        // se ritorna, il pagamento è andato a buon fine
+        String transazioneId = servizioPagamento.effetuaPagamento(hackathon.getTeamVincitore(), hackathon.getPremio());
+
+        hackathon.setPremioErogato(true);
+        repositoryHackathon.save(hackathon);
+        return transazioneId;
     }
 
     /*

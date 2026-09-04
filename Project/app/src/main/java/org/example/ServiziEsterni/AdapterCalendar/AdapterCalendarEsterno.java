@@ -1,6 +1,7 @@
-package org.example.ServiziEsterni;
+package org.example.ServiziEsterni.AdapterCalendar;
 
 import lombok.RequiredArgsConstructor;
+import org.example.ServiziEsterni.ServizioCalendario;
 import org.example.dto.CalendarEvent;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +9,10 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class AdapterCalendarEsterno implements ServizioCalendario{
+public class AdapterCalendarEsterno implements ServizioCalendario {
     private final CalendarEsterno calendarEsterno;
     @Override
     public String prenotaSlot(List<String> emailPartecipanti, Date dataInizio, int durataMinuti) {
