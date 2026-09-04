@@ -39,6 +39,10 @@ public class StatoConcluso implements HackathonState {
     public void squalificaTeam(Hackathon hackathon, Segnalazione segnalazione) {
         throw new IllegalStateException("L'hackathon è già concluso!");
     }
+    @Override
+    public void respingiSegnalazione(Hackathon hackathon, Segnalazione segnalazione) {
+        throw new IllegalStateException("L'hackathon è già concluso!");
+    }
 
     @Override
     public String getNome() { return "CONCLUSO"; }

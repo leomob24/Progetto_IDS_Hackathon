@@ -45,6 +45,9 @@ public class StatoInCorso implements HackathonState {
 
     @Override
     public void aggiungiSegnalazione(Hackathon hackathon, Segnalazione segnalazione) {
+        if (!segnalazione.getHackathon().equals(hackathon)) {
+            throw new IllegalArgumentException("La segnalazione non appartiene a questo hackathon!");
+        }
         segnalazione.setHackathon(hackathon);
         hackathon.getSegnalazioni().add(segnalazione);
     }
@@ -56,6 +59,13 @@ public class StatoInCorso implements HackathonState {
         }
         segnalazione.setEsito(EsitoSegnalazione.ACCOLTA);
         hackathon.getTeamIscritti().removeIf(i -> i.getTeam().equals(segnalazione.getTeam()));
+    }
+    @Override
+    public void respingiSegnalazione(Hackathon hackathon, Segnalazione segnalazione) {
+        if (!segnalazione.getHackathon().equals(hackathon)) {
+            throw new IllegalArgumentException("La segnalazione non appartiene a questo hackathon!");
+        }
+        segnalazione.setEsito(EsitoSegnalazione.RESPINTA);
     }
 
     @Override

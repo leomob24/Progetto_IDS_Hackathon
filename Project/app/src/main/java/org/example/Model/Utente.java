@@ -2,6 +2,7 @@ package org.example.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.DatiRegistrazione;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +41,12 @@ public class Utente {
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Invito> inviti = new ArrayList<>();
 
-    public Utente(String username, String password, String email, String nome, String cognome) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.nome = nome;
-        this.cognome = cognome;
-    }
-    public boolean VerificaPassword(String password){
-        return this.password.equals(password);
+    public Utente(DatiRegistrazione datiRegistrazione) {
+        this.username = datiRegistrazione.getUsername();
+        this.password = datiRegistrazione.getPassword();
+        this.email = datiRegistrazione.getEmail();
+        this.nome = datiRegistrazione.getNome();
+        this.cognome = datiRegistrazione.getCognome();
     }
 }
 

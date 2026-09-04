@@ -19,6 +19,9 @@ public interface RepositoryRuoloStaff extends JpaRepository<RuoloStaff, Long> {
     @Query("from Mentore m where m.hackathon = :hackathon")
     List<Mentore> recuperaMentoriHackathon(@Param("hackathon") Hackathon hackathon);
 
+    @Query("from Mentore m where m.staff = :staff and m.hackathon = :hackathon")
+    Optional<Mentore> recuperaMentoreHackathon(@Param("staff") Staff staff, @Param("hackathon") Hackathon hackathon);
+
     @Query("select distinct r.hackathon from RuoloStaff r where r.staff = :staff")
     List<Hackathon> recuperaHackathonAssegnati(@Param("staff") Staff staff);
 

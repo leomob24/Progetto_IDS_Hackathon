@@ -98,4 +98,8 @@ public class Hackathon {
         stato.squalificaTeam(this, segnalazione);
     }
 
+    public void respingiSegnalazione(Segnalazione segnalazione) {
+        stato.respingiSegnalazione(this, segnalazione);
+    }
+
 }

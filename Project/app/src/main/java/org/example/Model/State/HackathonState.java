@@ -11,6 +11,6 @@ public interface HackathonState {
     void giudicaSottomissione(Hackathon hackathon, Sottomissione sottomissione, DatiValutazione datiValutazione);
     void aggiungiSegnalazione(Hackathon hackathon, Segnalazione segnalazione);
     void squalificaTeam(Hackathon hackathon, Segnalazione segnalazione);
-
+    void respingiSegnalazione(Hackathon hackathon, Segnalazione segnalazione);
     String getNome();
 }

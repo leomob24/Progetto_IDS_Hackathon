@@ -26,7 +26,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
-    //Spring Boot
+    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
@@ -34,6 +34,8 @@ dependencies {
     // Lombok
     implementation("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")
+    // Crypto
+    implementation("org.springframework.security:spring-security-crypto")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

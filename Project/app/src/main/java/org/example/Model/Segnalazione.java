@@ -36,9 +36,9 @@ public class Segnalazione {
     @JoinColumn(name = "mentore_id", nullable = false)
     private Mentore mentore;
 
-    public Segnalazione(String motivazione, Date dataSegnalazione){
+    public Segnalazione(String motivazione){
         this.motivazione = motivazione;
-        this.dataSegnalazione = dataSegnalazione;
+        this.dataSegnalazione = new Date();
         this.esito = EsitoSegnalazione.PENDENTE;
     }
 

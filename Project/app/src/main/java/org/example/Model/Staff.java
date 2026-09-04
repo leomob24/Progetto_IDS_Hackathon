@@ -1,6 +1,8 @@
 package org.example.Model;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.DatiRegistrazione;
+
 import java.util.List;
 
 @NoArgsConstructor
@@ -30,15 +32,12 @@ public class Staff {
     @Column(nullable = false)
     private String password;
 
-    public Staff(String username, String nome, String cognome, String email, String password) {
-        this.username = username;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
-    }
-    public boolean VerificaPassword(String password){
-        return this.password.equals(password);
+    public Staff(DatiRegistrazione datiRegistrazione) {
+        this.username = datiRegistrazione.getUsername();
+        this.nome = datiRegistrazione.getNome();
+        this.cognome = datiRegistrazione.getCognome();
+        this.email = datiRegistrazione.getEmail();
+        this.password = datiRegistrazione.getPassword();
     }
 
 }

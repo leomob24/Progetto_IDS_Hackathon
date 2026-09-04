@@ -56,6 +56,10 @@ public class StatoInIscrizione implements HackathonState{
     public void squalificaTeam(Hackathon hackathon, Segnalazione segnalazione) {
         throw new IllegalStateException("L'hackathon non è ancora iniziato!");
     }
+    @Override
+    public void respingiSegnalazione(Hackathon hackathon, Segnalazione segnalazione) {
+        throw new IllegalStateException("L'hackathon non è ancora iniziato!");
+    }
 
     @Override
     public String getNome() { return "IN_ISCRIZIONE"; }
