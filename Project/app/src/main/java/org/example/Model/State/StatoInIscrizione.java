@@ -8,6 +8,9 @@ import java.util.Date;
 public class StatoInIscrizione implements HackathonState{
     @Override
     public void iscriviTeam(Hackathon hackathon, Team team) {
+        if (new Date().after(hackathon.getScadenzaIscrizioni())) {
+            throw new IllegalStateException("La scadenza delle iscrizioni è già passata!");
+        }
         if (hackathon.getTeamIscritti().size() >= hackathon.getMaxTeamPartecipanti()) {
             throw new IllegalStateException("Numero massimo di team raggiunto!");
         }
