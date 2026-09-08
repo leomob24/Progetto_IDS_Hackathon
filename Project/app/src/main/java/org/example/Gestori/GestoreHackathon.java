@@ -82,6 +82,35 @@ public class GestoreHackathon {
         return repositoryHackathon.findByStato(new StatoInIscrizione());
     }
 
+    /*
+    * avviaHackathon/valutaHackathon/concludiHackathon: collegamento mancante (nessun Gestore le richiamava)
+    * verso le transizioni di stato già presenti su Hackathon/HackathonState (State pattern). Richiamabili
+    * manualmente via REST invece che da uno SchedulerHackathon mai implementato - vedi docs/decisioni.md.
+    */
+    @Transactional
+    public Hackathon avviaHackathon(long hackathonId) {
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+        hackathon.avviaHackathon();
+        return repositoryHackathon.save(hackathon);
+    }
+
+    @Transactional
+    public Hackathon valutaHackathon(long hackathonId) {
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+        hackathon.valutaHackathon();
+        return repositoryHackathon.save(hackathon);
+    }
+
+    @Transactional
+    public Hackathon concludiHackathon(long hackathonId) {
+        Hackathon hackathon = repositoryHackathon.findById(hackathonId)
+                .orElseThrow(() -> new IllegalArgumentException("Hackathon non trovato"));
+        hackathon.concludiHackathon();
+        return repositoryHackathon.save(hackathon);
+    }
+
     @Transactional
     public Team proclamaVincitore(long hackathonId, long teamId){
         Hackathon hackathon = repositoryHackathon.findById(hackathonId)
