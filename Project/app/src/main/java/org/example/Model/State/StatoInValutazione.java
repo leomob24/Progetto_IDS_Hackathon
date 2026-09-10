@@ -56,9 +56,6 @@ public class StatoInValutazione implements HackathonState {
     }
     @Override
     public void aggiungiSegnalazione(Hackathon hackathon, Segnalazione segnalazione) {
-        if (!segnalazione.getHackathon().equals(hackathon)) {
-            throw new IllegalArgumentException("La segnalazione non appartiene a questo hackathon!");
-        }
         segnalazione.setHackathon(hackathon);
         hackathon.getSegnalazioni().add(segnalazione);
     }

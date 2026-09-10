@@ -33,8 +33,7 @@ public class GestoreSegnalazioni {
         segnalazione.setMentore(mentore);
         hackathon.aggiungiSegnalazione(segnalazione);
 
-        repositoryHackathon.save(hackathon);
-        return segnalazione;
+        return repositorySegnalazioni.save(segnalazione);
     }
     @Transactional(readOnly = true)
     public List<Segnalazione> recuperaSegnalazioni(Long hackathonId){

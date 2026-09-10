@@ -1,0 +1,455 @@
+{
+  "info": {
+    "name": "HackHub",
+    "description": "Collection di verifica manuale per lo strato REST di HackHub. Le richieste sono ordinate per essere eseguite in sequenza (Collection Runner) e ricostruiscono un ciclo di vita completo di un hackathon: registrazione/login, creazione hackathon, team, iscrizione, avvio, sottomissione, chiusura sottomissioni, valutazione, proclamazione, conclusione, erogazione premio, inviti, supporto, segnalazioni. Le richieste con test script salvano gli id nelle variabili di collection, cosi' le richieste successive li riusano automaticamente. Autenticazione: nessuna sessione/JWT, gli endpoint che richiedono un chiamante prendono utenteId/staffId come query param.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "organizzatoreId", "value": "" },
+    { "key": "giudiceId", "value": "" },
+    { "key": "mentoreId", "value": "" },
+    { "key": "utenteId", "value": "" },
+    { "key": "utente2Id", "value": "" },
+    { "key": "hackathonId", "value": "" },
+    { "key": "scadenzaIscrizioniISO", "value": "" },
+    { "key": "dataInizioISO", "value": "" },
+    { "key": "dataFineISO", "value": "" },
+    { "key": "teamId", "value": "" },
+    { "key": "invitoId", "value": "" },
+    { "key": "iscrizioneId", "value": "" },
+    { "key": "sottomissioneId", "value": "" },
+    { "key": "valutazioneId", "value": "" },
+    { "key": "richiestaSupportoId", "value": "" },
+    { "key": "segnalazioneId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "1. Autenticazione",
+      "item": [
+        {
+          "name": "Registra Organizzatore",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Anna\",\n  \"cognome\": \"Organizzatrice\",\n  \"email\": \"organizzatore@hackhub.test\",\n  \"username\": \"organizzatore1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Giudice",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Giulio\",\n  \"cognome\": \"Giudice\",\n  \"email\": \"giudice@hackhub.test\",\n  \"username\": \"giudice1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Mentore",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Marco\",\n  \"cognome\": \"Mentore\",\n  \"email\": \"mentore@hackhub.test\",\n  \"username\": \"mentore1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Utente (capitano team)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/utenti",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Ugo\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente1@hackhub.test\",\n  \"username\": \"utente1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Utente 2 (da invitare)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/utenti",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Uma\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente2@hackhub.test\",\n  \"username\": \"utente2\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Organizzatore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('organizzatoreId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"organizzatore1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Giudice",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('giudiceId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"giudice1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Mentore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('mentoreId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"mentore1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Utente",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('utenteId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente1\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Utente 2",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('utente2Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente2\",\n  \"password\": \"password123\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Hackathon - creazione e consultazione",
+      "item": [
+        {
+          "name": "Crea Hackathon",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function toIsoDate(d) { return d.toISOString().slice(0, 10); }",
+                  "const oggi = new Date();",
+                  "const domani = new Date(oggi); domani.setDate(oggi.getDate() + 1);",
+                  "pm.collectionVariables.set('scadenzaIscrizioniISO', toIsoDate(domani));",
+                  "pm.collectionVariables.set('dataInizioISO', toIsoDate(oggi));",
+                  "pm.collectionVariables.set('dataFineISO', toIsoDate(oggi));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.collectionVariables.set('hackathonId', body.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{baseUrl}}/hackathon?organizzatoreId={{organizzatoreId}}&giudiceId={{giudiceId}}&mentoriIds={{mentoreId}}",
+              "host": ["{{baseUrl}}"], "path": ["hackathon"],
+              "query": [
+                { "key": "organizzatoreId", "value": "{{organizzatoreId}}" },
+                { "key": "giudiceId", "value": "{{giudiceId}}" },
+                { "key": "mentoriIds", "value": "{{mentoreId}}" }
+              ]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"HackHub Demo Day\",\n  \"regolamento\": \"Regolamento di prova per verifica REST via Postman\",\n  \"luogo\": \"Camerino\",\n  \"premio\": 1000,\n  \"maxTeamPartecipanti\": 5,\n  \"scadenzaIscrizioni\": \"{{scadenzaIscrizioniISO}}\",\n  \"dataInizio\": \"{{dataInizioISO}}\",\n  \"dataFine\": \"{{dataFineISO}}\"\n}" },
+            "description": "Le date (scadenzaIscrizioni/dataInizio/dataFine) sono calcolate dal pre-request script rispetto al giorno di esecuzione, cosi' la collection resta eseguibile in qualunque data senza modifiche manuali. dataInizio e dataFine = oggi, cosi' che 'Chiudi iscrizioni (avvia hackathon)' nella cartella 4 e 'Concludi Hackathon' nella cartella 5 abbiano successo subito, nella stessa esecuzione. scadenzaIscrizioni = domani (dopo dataInizio, controllo di ordinamento disattivato lato server per questo scenario di test) cosi' che 'Iscrivi Team a Hackathon' nella cartella 3, eseguito prima, non trovi le iscrizioni gia' scadute."
+          }
+        },
+        {
+          "name": "Lista Hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/hackathon" }
+        },
+        {
+          "name": "Hackathon in iscrizione",
+          "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/in-iscrizione" }
+        },
+        {
+          "name": "Ruoli staff assegnati?",
+          "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/ruoli-assegnati" }
+        },
+        {
+          "name": "Mentori non ancora assegnati",
+          "request": { "method": "GET", "url": "{{baseUrl}}/staff/hackathon/{{hackathonId}}/mentori-non-assegnati" }
+        },
+        {
+          "name": "Hackathon assegnati all'Organizzatore",
+          "request": { "method": "GET", "url": "{{baseUrl}}/staff/{{organizzatoreId}}/hackathon-assegnati" }
+        }
+      ]
+    },
+    {
+      "name": "3. Team e iscrizione",
+      "item": [
+        {
+          "name": "Nome team disponibile?",
+          "request": { "method": "GET", "url": "{{baseUrl}}/team/valida?nome=TeamPostman" }
+        },
+        {
+          "name": "Crea Team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('teamId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/team?utenteId={{utenteId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"TeamPostman\"\n}" }
+          }
+        },
+        {
+          "name": "Utenti senza team",
+          "request": { "method": "GET", "url": "{{baseUrl}}/utenti/senza-team" }
+        },
+        {
+          "name": "Invita Utente 2 nel team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('invitoId', body.id);"
+          ] } }],
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente2Id}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Inviti pendenti di Utente 2",
+          "request": { "method": "GET", "url": "{{baseUrl}}/inviti/utente/{{utente2Id}}/pendenti" }
+        },
+        {
+          "name": "Utente 2 accetta l'invito",
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
+        },
+        {
+          "name": "Team esiste iscrizione? (atteso false)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/team/iscrizione?hackathonId={{hackathonId}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Iscrivi Team a Hackathon",
+          "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Team iscritti all'hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/team/hackathon/{{hackathonId}}" }
+        }
+      ]
+    },
+    {
+      "name": "4. Sottomissione e valutazione",
+      "item": [
+        {
+          "name": "Chiudi iscrizioni (avvia hackathon)",
+          "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/avvia" }
+        },
+        {
+          "name": "Recupera iscrizione del team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "if (body.length > 0) { pm.collectionVariables.set('iscrizioneId', body[0].id); }"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni/team/{{teamId}}/iscrizioni" }
+        },
+        {
+          "name": "Invia Sottomissione",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('sottomissioneId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/sottomissioni?iscrizioneId={{iscrizioneId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"titolo\": \"Progetto Demo\",\n  \"descrizione\": \"Sottomissione di prova per Postman\",\n  \"linkRepository\": \"https://github.com/hackhub/demo\"\n}" }
+          }
+        },
+        {
+          "name": "Aggiorna Sottomissione",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/sottomissioni/{{sottomissioneId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"titolo\": \"Progetto Demo v2\",\n  \"descrizione\": \"Versione aggiornata\",\n  \"linkRepository\": \"https://github.com/hackhub/demo\"\n}" }
+          }
+        },
+        {
+          "name": "Sottomissioni dell'hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni/hackathon/{{hackathonId}}" }
+        },
+        {
+          "name": "Chiudi sottomissioni (valuta hackathon)",
+          "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/valuta" }
+        },
+        {
+          "name": "Assegna Valutazione (Giudice assegnato)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('valutazioneId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/valutazioni?sottomissioneId={{sottomissioneId}}&giudiceId={{giudiceId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"punteggio\": 9,\n  \"giudizio\": \"Ottimo lavoro, ben eseguito\"\n}" }
+          }
+        },
+        {
+          "name": "Classifica hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/classifica" }
+        }
+      ]
+    },
+    {
+      "name": "5. Mentoring (supporto e segnalazioni)",
+      "item": [
+        {
+          "name": "Crea Richiesta di Supporto",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('richiestaSupportoId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/supporto?iscrizioneId={{iscrizioneId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"oggetto\": \"Bloccati sul deploy\",\n  \"descrizione\": \"Non riusciamo a far partire il container Docker\"\n}" }
+          }
+        },
+        {
+          "name": "Richieste di supporto dell'hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/supporto/hackathon/{{hackathonId}}" }
+        },
+        {
+          "name": "Dettaglio richiesta di supporto",
+          "request": { "method": "GET", "url": "{{baseUrl}}/supporto/{{richiestaSupportoId}}" }
+        },
+        {
+          "name": "Pianifica Call di supporto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/supporto/{{richiestaSupportoId}}/call",
+            "body": { "mode": "raw", "raw": "{\n  \"data\": \"2026-01-02T15:00:00.000Z\",\n  \"durata\": 30,\n  \"link\": \"https://meet.example.com/hackhub-demo\"\n}" }
+          }
+        },
+        {
+          "name": "Crea Segnalazione Team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('segnalazioneId', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/segnalazioni",
+            "body": { "mode": "raw", "raw": "{\n  \"motivazione\": \"Comportamento scorretto durante l'evento\",\n  \"teamId\": {{teamId}},\n  \"hackathonId\": {{hackathonId}},\n  \"mentoreId\": {{mentoreId}}\n}" }
+          }
+        },
+        {
+          "name": "Segnalazioni dell'hackathon",
+          "request": { "method": "GET", "url": "{{baseUrl}}/segnalazioni/hackathon/{{hackathonId}}" }
+        },
+        {
+          "name": "Respingi Segnalazione",
+          "request": { "method": "POST", "url": "{{baseUrl}}/segnalazioni/{{segnalazioneId}}/respingi" }
+        }
+      ]
+    },
+    {
+      "name": "6. Proclamazione e premio",
+      "item": [
+        {
+          "name": "Proclama Vincitore",
+          "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/vincitore?teamId={{teamId}}" }
+        },
+        {
+          "name": "Concludi Hackathon",
+          "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/concludi" }
+        },
+        {
+          "name": "Eroga Premio SENZA iban (atteso 400)",
+          "request": { "method": "POST", "url": "{{baseUrl}}/pagamenti/{{hackathonId}}/eroga" }
+        },
+        {
+          "name": "Aggiungi IBAN al Team",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/team/{{teamId}}/iban",
+            "body": { "mode": "raw", "raw": "{\n  \"iban\": \"IT60X0542811101000000123456\"\n}" }
+          }
+        },
+        {
+          "name": "Eroga Premio",
+          "request": { "method": "POST", "url": "{{baseUrl}}/pagamenti/{{hackathonId}}/eroga" }
+        }
+      ]
+    },
+    {
+      "name": "7. Casi negativi (verifica invarianti / gestione errori)",
+      "item": [
+        {
+          "name": "Login con password errata -> 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente1\",\n  \"password\": \"password-sbagliata\"\n}" }
+          }
+        },
+        {
+          "name": "Hackathon inesistente -> 404",
+          "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/999999/classifica" }
+        },
+        {
+          "name": "Iscrizione a hackathon concluso -> 409",
+          "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Avvia hackathon gia' concluso -> 409",
+          "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/avvia" }
+        },
+        {
+          "name": "Valutazione da Giudice non assegnato -> 400",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/valutazioni?sottomissioneId={{sottomissioneId}}&giudiceId=999999",
+            "body": { "mode": "raw", "raw": "{\n  \"punteggio\": 5,\n  \"giudizio\": \"tentativo non autorizzato\"\n}" }
+          }
+        },
+        {
+          "name": "Utente accetta un secondo invito -> invariante 1 (409)",
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
+        }
+      ]
+    }
+  ]
+}

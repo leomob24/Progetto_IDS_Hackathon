@@ -28,8 +28,8 @@ class GlobalExceptionHandler {
     /*
      * GestoreSottomissioni.getSottomissione lancia NullPointerException (non IllegalArgumentException come
      * il resto dei Gestori) quando la sottomissione non esiste: è uno scarto rispetto allo schema di eccezioni
-     * di CLAUDE.md §6, non corretto qui in silenzio (vedi nota nella risposta all'utente). Mappata comunque
-     * a 404 così l'endpoint resta utilizzabile da Postman nel frattempo.
+     * usato ovunque nel resto dei Gestori. Mappata comunque a 404 così l'endpoint resta utilizzabile da Postman
+     * nel frattempo.
      */
     @ExceptionHandler(NullPointerException.class)
     ResponseEntity<ErrorResponse> handleNullPointer(NullPointerException e) {
