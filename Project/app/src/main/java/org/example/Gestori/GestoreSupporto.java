@@ -6,8 +6,6 @@ import org.example.Repository.RepositoryHackathon;
 import org.example.Repository.RepositoryIscrizioni;
 import org.example.Repository.RepositoryRichiesteDiSupporto;
 import org.example.Repository.RepositoryTeam;
-import org.example.ServiziEsterni.ServizioCalendario;
-import org.example.dto.DatiCall;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GestoreSupporto {
-    private final ServizioCalendario servizioCalendario;
     private final RepositoryRichiesteDiSupporto repositoryRichiesteDiSupporto;
     private final RepositoryIscrizioni repositoryIscrizioni;
     private final RepositoryTeam repositoryTeam;
@@ -54,16 +51,4 @@ public class GestoreSupporto {
         return repositoryRichiesteDiSupporto.findById(richiestaDiSupportoId)
                 .orElseThrow(() -> new IllegalArgumentException("Richiesta di supporto non trovata"));
     }
-    @Transactional
-    public Call pianificaCall(long richiestaId, DatiCall datiCall){
-        RichiestaDiSupporto richiestaDiSupporto = repositoryRichiesteDiSupporto.findById(richiestaId)
-                .orElseThrow(() -> new IllegalArgumentException("Richiesta di supporto non trovata"));
-        Call call = new Call(datiCall);
-        call.setRichiestaDiSupporto(richiestaDiSupporto);
-        repositoryRichiesteDiSupporto.save(richiestaDiSupporto);
-        return call;
-    }
-
-
-
 }

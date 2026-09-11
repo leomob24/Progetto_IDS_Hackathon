@@ -2,13 +2,10 @@ package org.example.Controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.Controller.Requests.CreaRichiestaSupportoRequest;
-import org.example.Controller.Responses.CallResponse;
 import org.example.Controller.Responses.IscrizioneResponse;
 import org.example.Controller.Responses.RichiestaDiSupportoResponse;
 import org.example.Gestori.GestoreSupporto;
-import org.example.Model.Call;
 import org.example.Model.RichiestaDiSupporto;
-import org.example.dto.DatiCall;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,11 +42,5 @@ class SupportoController {
     @GetMapping("/{id}")
     RichiestaDiSupportoResponse recuperaDati(@PathVariable long id) {
         return ResponseMapper.toResponse(gestoreSupporto.recuperaDati(id));
-    }
-
-    @PostMapping("/{id}/call")
-    ResponseEntity<CallResponse> pianificaCall(@PathVariable long id, @RequestBody DatiCall dati) {
-        Call call = gestoreSupporto.pianificaCall(id, dati);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMapper.toResponse(call));
     }
 }

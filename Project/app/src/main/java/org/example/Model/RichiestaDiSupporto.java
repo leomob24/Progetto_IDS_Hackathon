@@ -31,9 +31,6 @@ public class RichiestaDiSupporto {
     @JoinColumn(name = "iscrizione_id", nullable = false)
     private Iscrizione iscrizione;
 
-    @OneToOne(mappedBy = "richiestaDiSupporto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Call call;
-
     public RichiestaDiSupporto(String oggetto, String descrizione){
         this.oggetto = oggetto;
         this.descrizione = descrizione;

@@ -62,14 +62,8 @@ final class ResponseMapper {
     }
 
     static RichiestaDiSupportoResponse toResponse(RichiestaDiSupporto r) {
-        Long callId = r.getCall() != null ? r.getCall().getId() : null;
         return new RichiestaDiSupportoResponse(r.getId(), r.getOggetto(), r.getDescrizione(), r.getDataInvio(),
-                r.getEsito().name(), r.getIscrizione().getId(), callId);
-    }
-
-    static CallResponse toResponse(Call c) {
-        return new CallResponse(c.getId(), c.getDataCall(), c.getDurataMinuti(), c.getLinkCall(),
-                c.getRichiestaDiSupporto().getId());
+                r.getEsito().name(), r.getIscrizione().getId());
     }
 
     static RuoloStaffResponse toResponse(RuoloStaff r) {

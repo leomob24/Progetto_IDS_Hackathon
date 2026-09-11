@@ -44,10 +44,7 @@ final class Responses {
     }
 
     record RichiestaDiSupportoResponse(long id, String oggetto, String descrizione, Date dataInvio, String esito,
-                                        long iscrizioneId, Long callId) {
-    }
-
-    record CallResponse(long id, Date dataCall, int durataMinuti, String linkCall, long richiestaDiSupportoId) {
+                                        long iscrizioneId) {
     }
 
     record RuoloStaffResponse(long id, long staffId, long hackathonId, String ruolo) {

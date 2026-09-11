@@ -503,15 +503,6 @@
           "request": { "method": "GET", "url": "{{baseUrl}}/supporto/{{richiestaSupportoId}}" }
         },
         {
-          "name": "Pianifica Call di supporto",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "url": "{{baseUrl}}/supporto/{{richiestaSupportoId}}/call",
-            "body": { "mode": "raw", "raw": "{\n  \"data\": \"2026-01-02T15:00:00.000Z\",\n  \"durata\": 30,\n  \"link\": \"https://meet.example.com/hackhub-demo\"\n}" }
-          }
-        },
-        {
           "name": "Crea Segnalazione Team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
