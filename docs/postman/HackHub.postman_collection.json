@@ -11,17 +11,25 @@
     { "key": "mentoreId", "value": "" },
     { "key": "utenteId", "value": "" },
     { "key": "utente2Id", "value": "" },
+    { "key": "utente3Id", "value": "" },
+    { "key": "utente4Id", "value": "" },
+    { "key": "utente5Id", "value": "" },
+    { "key": "mentore2Id", "value": "" },
     { "key": "hackathonId", "value": "" },
     { "key": "scadenzaIscrizioniISO", "value": "" },
     { "key": "dataInizioISO", "value": "" },
     { "key": "dataFineISO", "value": "" },
     { "key": "teamId", "value": "" },
+    { "key": "team2Id", "value": "" },
     { "key": "invitoId", "value": "" },
+    { "key": "invito3Id", "value": "" },
+    { "key": "invito4Id", "value": "" },
     { "key": "iscrizioneId", "value": "" },
     { "key": "sottomissioneId", "value": "" },
     { "key": "valutazioneId", "value": "" },
     { "key": "richiestaSupportoId", "value": "" },
-    { "key": "segnalazioneId", "value": "" }
+    { "key": "segnalazioneId", "value": "" },
+    { "key": "segnalazione2Id", "value": "" }
   ],
   "item": [
     {
@@ -70,6 +78,42 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "url": "{{baseUrl}}/auth/utenti",
             "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Uma\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente2@hackhub.test\",\n  \"username\": \"utente2\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Utente 3 (rifiuta invito)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/utenti",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Uber\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente3@hackhub.test\",\n  \"username\": \"utente3\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Utente 4 (esce dal team)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/utenti",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Ubaldo\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente4@hackhub.test\",\n  \"username\": \"utente4\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Utente 5 (capitano Team da squalificare)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/utenti",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Ulla\",\n  \"cognome\": \"Utente\",\n  \"email\": \"utente5@hackhub.test\",\n  \"username\": \"utente5\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Registra Mentore 2 (assegnazione successiva)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Mara\",\n  \"cognome\": \"Mentore\",\n  \"email\": \"mentore2@hackhub.test\",\n  \"username\": \"mentore2\",\n  \"password\": \"password123\"\n}" }
           }
         },
         {
@@ -135,6 +179,58 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "url": "{{baseUrl}}/auth/login/utente",
             "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente2\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Utente 3",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('utente3Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente3\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Utente 4",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('utente4Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente4\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Utente 5",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('utente5Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/utente",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"utente5\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Login Mentore 2",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('mentore2Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login/staff",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"mentore2\",\n  \"password\": \"password123\"\n}" }
           }
         }
       ]
@@ -205,6 +301,13 @@
         {
           "name": "Hackathon assegnati all'Organizzatore",
           "request": { "method": "GET", "url": "{{baseUrl}}/staff/{{organizzatoreId}}/hackathon-assegnati" }
+        },
+        {
+          "name": "Assegna Mentore aggiuntivo",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/staff/hackathon/{{hackathonId}}/mentori?staffIds={{mentore2Id}}"
+          }
         }
       ]
     },
@@ -249,12 +352,57 @@
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
         },
         {
+          "name": "Invita Utente 3 nel team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('invito3Id', body.id);"
+          ] } }],
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente3Id}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Utente 3 rifiuta l'invito",
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invito3Id}}/rifiuta" }
+        },
+        {
+          "name": "Invita Utente 4 nel team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('invito4Id', body.id);"
+          ] } }],
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente4Id}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Utente 4 accetta l'invito",
+          "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invito4Id}}/accetta" }
+        },
+        {
+          "name": "Utente 4 esce dal team",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/team/membri/{{utente4Id}}" }
+        },
+        {
           "name": "Team esiste iscrizione? (atteso false)",
           "request": { "method": "GET", "url": "{{baseUrl}}/team/iscrizione?hackathonId={{hackathonId}}&teamId={{teamId}}" }
         },
         {
           "name": "Iscrivi Team a Hackathon",
           "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{teamId}}" }
+        },
+        {
+          "name": "Crea Team da Squalificare",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('team2Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/team?utenteId={{utente5Id}}",
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"TeamDaSqualificare\"\n}" }
+          }
+        },
+        {
+          "name": "Iscrivi Team da Squalificare a Hackathon",
+          "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{team2Id}}" }
         },
         {
           "name": "Team iscritti all'hackathon",
@@ -302,6 +450,10 @@
         {
           "name": "Sottomissioni dell'hackathon",
           "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni/hackathon/{{hackathonId}}" }
+        },
+        {
+          "name": "Sottomissione del team (singola)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni?teamId={{teamId}}&hackathonId={{hackathonId}}" }
         },
         {
           "name": "Chiudi sottomissioni (valuta hackathon)",
@@ -379,6 +531,23 @@
         {
           "name": "Respingi Segnalazione",
           "request": { "method": "POST", "url": "{{baseUrl}}/segnalazioni/{{segnalazioneId}}/respingi" }
+        },
+        {
+          "name": "Crea Segnalazione Team da Squalificare",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('segnalazione2Id', body.id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/segnalazioni",
+            "body": { "mode": "raw", "raw": "{\n  \"motivazione\": \"Violazione grave del regolamento\",\n  \"teamId\": {{team2Id}},\n  \"hackathonId\": {{hackathonId}},\n  \"mentoreId\": {{mentoreId}}\n}" }
+          }
+        },
+        {
+          "name": "Squalifica Team",
+          "request": { "method": "POST", "url": "{{baseUrl}}/segnalazioni/{{segnalazione2Id}}/squalifica" }
         }
       ]
     },
@@ -448,6 +617,10 @@
         {
           "name": "Utente accetta un secondo invito -> invariante 1 (409)",
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
+        },
+        {
+          "name": "Assegna Giudice gia' assegnato -> 409",
+          "request": { "method": "POST", "url": "{{baseUrl}}/staff/{{giudiceId}}/giudice/{{hackathonId}}" }
         }
       ]
     }

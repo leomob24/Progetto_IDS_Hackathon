@@ -72,9 +72,14 @@ public class GestoreTeam {
     public Utente rimuoviMembro(long utente_id){
         Utente membro = repositoryUtenti.findById(utente_id)
                 .orElseThrow(() -> new IllegalArgumentException("Utente non trovato"));
+        Team team = membro.getTeam();
+        if(team == null){
+            throw new IllegalStateException("L'utente non appartiene a nessun team");
+        }
+        team.removeMembro(membro);
         membro.setTeam(null);
-        if(membro.getTeam().getNumMembri()==0){
-            repositoryTeam.delete(membro.getTeam());
+        if(team.getNumMembri()==0){
+            repositoryTeam.delete(team);
         }
         return repositoryUtenti.save(membro);
     }

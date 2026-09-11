@@ -6,3 +6,6 @@ build
 
 # Ignore Kotlin plugin data
 .kotlin
+
+# Database H2 su file (dati locali di sviluppo/test, non da versionare)
+app/database/
