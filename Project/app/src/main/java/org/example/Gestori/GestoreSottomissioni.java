@@ -26,6 +26,7 @@ public class GestoreSottomissioni {
     public Sottomissione inviaSottomissione(DatiSottomissione datiSottomissione, Long iscrizione_id) {
         Iscrizione iscrizione = repositoryIscrizioni.findById(iscrizione_id)
                 .orElseThrow(() -> new IllegalArgumentException("Iscrizione non trovata"));
+        iscrizione.getHackathon().verificaSottomissioniAperte();
         if(!validaDati(datiSottomissione)) {
             throw new IllegalArgumentException("Dati non validi");
         }
@@ -70,6 +71,7 @@ public class GestoreSottomissioni {
     public Sottomissione aggiornaSottomissione(Long sottomissione_id, DatiSottomissione datiSottomissione){
         Sottomissione sottomissione= repositorySottomissioni.findById(sottomissione_id)
                 .orElseThrow(() -> new IllegalArgumentException("Sottomissione non trovata"));
+        sottomissione.getIscrizione().getHackathon().verificaSottomissioniAperte();
         sottomissione.setTitolo(datiSottomissione.getTitolo());
         sottomissione.setDescrizione(datiSottomissione.getDescrizione());
         sottomissione.setLinkRepository(datiSottomissione.getLinkRepository());

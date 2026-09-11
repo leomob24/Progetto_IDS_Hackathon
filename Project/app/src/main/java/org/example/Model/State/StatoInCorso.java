@@ -11,6 +11,11 @@ public class StatoInCorso implements HackathonState {
     }
 
     @Override
+    public void verificaSottomissioniAperte(Hackathon hackathon) {
+        // consentito: le sottomissioni si inviano/aggiornano solo mentre l'hackathon è in corso
+    }
+
+    @Override
     public void avviaHackathon(Hackathon hackathon) {
         throw new IllegalStateException("L'hackathon è già in corso!");
     }

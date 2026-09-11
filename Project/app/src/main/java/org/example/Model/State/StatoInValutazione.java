@@ -12,6 +12,11 @@ public class StatoInValutazione implements HackathonState {
     }
 
     @Override
+    public void verificaSottomissioniAperte(Hackathon hackathon) {
+        throw new IllegalStateException("Le sottomissioni sono chiuse!");
+    }
+
+    @Override
     public void avviaHackathon(Hackathon hackathon) {
         throw new IllegalStateException("L'hackathon è già stato avviato!");
     }

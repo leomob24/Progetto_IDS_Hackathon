@@ -10,6 +10,11 @@ public class StatoConcluso implements HackathonState {
     }
 
     @Override
+    public void verificaSottomissioniAperte(Hackathon hackathon) {
+        throw new IllegalStateException("L'hackathon è concluso!");
+    }
+
+    @Override
     public void avviaHackathon(Hackathon hackathon) {
         throw new IllegalStateException("L'hackathon è concluso!");
     }

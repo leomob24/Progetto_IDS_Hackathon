@@ -37,6 +37,10 @@
       "item": [
         {
           "name": "Registra Organizzatore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -46,6 +50,10 @@
         },
         {
           "name": "Registra Giudice",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -55,6 +63,10 @@
         },
         {
           "name": "Registra Mentore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -64,6 +76,10 @@
         },
         {
           "name": "Registra Utente (capitano team)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -73,6 +89,10 @@
         },
         {
           "name": "Registra Utente 2 (da invitare)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -82,6 +102,10 @@
         },
         {
           "name": "Registra Utente 3 (rifiuta invito)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -91,6 +115,10 @@
         },
         {
           "name": "Registra Utente 4 (esce dal team)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -100,6 +128,10 @@
         },
         {
           "name": "Registra Utente 5 (capitano Team da squalificare)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -109,6 +141,10 @@
         },
         {
           "name": "Registra Mentore 2 (assegnazione successiva)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"corpo vuoto\", function () { pm.expect(pm.response.text()).to.be.empty; });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -120,7 +156,9 @@
           "name": "Login Organizzatore",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('organizzatoreId', body.id);"
+            "pm.collectionVariables.set('organizzatoreId', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -133,7 +171,9 @@
           "name": "Login Giudice",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('giudiceId', body.id);"
+            "pm.collectionVariables.set('giudiceId', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -146,7 +186,9 @@
           "name": "Login Mentore",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('mentoreId', body.id);"
+            "pm.collectionVariables.set('mentoreId', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -159,7 +201,9 @@
           "name": "Login Utente",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('utenteId', body.id);"
+            "pm.collectionVariables.set('utenteId', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -172,7 +216,9 @@
           "name": "Login Utente 2",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('utente2Id', body.id);"
+            "pm.collectionVariables.set('utente2Id', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -185,7 +231,9 @@
           "name": "Login Utente 3",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('utente3Id', body.id);"
+            "pm.collectionVariables.set('utente3Id', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -198,7 +246,9 @@
           "name": "Login Utente 4",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('utente4Id', body.id);"
+            "pm.collectionVariables.set('utente4Id', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -211,7 +261,9 @@
           "name": "Login Utente 5",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('utente5Id', body.id);"
+            "pm.collectionVariables.set('utente5Id', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -224,7 +276,9 @@
           "name": "Login Mentore 2",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('mentore2Id', body.id);"
+            "pm.collectionVariables.set('mentore2Id', body.id);",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
           ] } }],
           "request": {
             "method": "POST",
@@ -261,7 +315,10 @@
                 "type": "text/javascript",
                 "exec": [
                   "const body = pm.response.json();",
-                  "pm.collectionVariables.set('hackathonId', body.id);"
+                  "pm.collectionVariables.set('hackathonId', body.id);",
+                  "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+                  "pm.test(\"stato IN_ISCRIZIONE\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_ISCRIZIONE\"); });",
+                  "pm.test(\"nome corretto\", function () { const body = pm.response.json(); pm.expect(body.nome).to.eql(\"HackHub Demo Day\"); });"
                 ]
               }
             }
@@ -284,26 +341,50 @@
         },
         {
           "name": "Lista Hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/hackathon" }
         },
         {
           "name": "Hackathon in iscrizione",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/in-iscrizione" }
         },
         {
           "name": "Ruoli staff assegnati?",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"tutti i ruoli assegnati\", function () { pm.expect(pm.response.json()).to.eql(true); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/ruoli-assegnati" }
         },
         {
           "name": "Mentori non ancora assegnati",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array'); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/staff/hackathon/{{hackathonId}}/mentori-non-assegnati" }
         },
         {
           "name": "Hackathon assegnati all'Organizzatore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/staff/{{organizzatoreId}}/hackathon-assegnati" }
         },
         {
           "name": "Assegna Mentore aggiuntivo",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": {
             "method": "POST",
             "url": "{{baseUrl}}/staff/hackathon/{{hackathonId}}/mentori?staffIds={{mentore2Id}}"
@@ -316,13 +397,20 @@
       "item": [
         {
           "name": "Nome team disponibile?",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"nome disponibile\", function () { pm.expect(pm.response.json()).to.eql(true); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/team/valida?nome=TeamPostman" }
         },
         {
           "name": "Crea Team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('teamId', body.id);"
+            "pm.collectionVariables.set('teamId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"nome corretto\", function () { const body = pm.response.json(); pm.expect(body.nome).to.eql(\"TeamPostman\"); });",
+            "pm.test('un membro (il capitano)', function () { const body = pm.response.json(); pm.expect(body.numMembri).to.eql(1); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -333,65 +421,105 @@
         },
         {
           "name": "Utenti senza team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array'); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/utenti/senza-team" }
         },
         {
           "name": "Invita Utente 2 nel team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('invitoId', body.id);"
+            "pm.collectionVariables.set('invitoId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"stato IN_ATTESA\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_ATTESA\"); });"
           ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente2Id}}&teamId={{teamId}}" }
         },
         {
           "name": "Inviti pendenti di Utente 2",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/inviti/utente/{{utente2Id}}/pendenti" }
         },
         {
           "name": "Utente 2 accetta l'invito",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato ACCETTATO\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"ACCETTATO\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
         },
         {
           "name": "Invita Utente 3 nel team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('invito3Id', body.id);"
+            "pm.collectionVariables.set('invito3Id', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"stato IN_ATTESA\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_ATTESA\"); });"
           ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente3Id}}&teamId={{teamId}}" }
         },
         {
           "name": "Utente 3 rifiuta l'invito",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato RIFIUTATO\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"RIFIUTATO\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invito3Id}}/rifiuta" }
         },
         {
           "name": "Invita Utente 4 nel team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('invito4Id', body.id);"
+            "pm.collectionVariables.set('invito4Id', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"stato IN_ATTESA\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_ATTESA\"); });"
           ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti?utenteId={{utente4Id}}&teamId={{teamId}}" }
         },
         {
           "name": "Utente 4 accetta l'invito",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato ACCETTATO\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"ACCETTATO\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invito4Id}}/accetta" }
         },
         {
           "name": "Utente 4 esce dal team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test('utente senza team', function () { const body = pm.response.json(); pm.expect(body.teamId).to.be.null; });"
+          ] } }],
           "request": { "method": "DELETE", "url": "{{baseUrl}}/team/membri/{{utente4Id}}" }
         },
         {
           "name": "Team esiste iscrizione? (atteso false)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"non ancora iscritto\", function () { pm.expect(pm.response.json()).to.eql(false); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/team/iscrizione?hackathonId={{hackathonId}}&teamId={{teamId}}" }
         },
         {
           "name": "Iscrivi Team a Hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"iscrizione riuscita\", function () { pm.expect(pm.response.json()).to.eql(true); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{teamId}}" }
         },
         {
           "name": "Crea Team da Squalificare",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('team2Id', body.id);"
+            "pm.collectionVariables.set('team2Id', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"nome corretto\", function () { const body = pm.response.json(); pm.expect(body.nome).to.eql(\"TeamDaSqualificare\"); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -402,10 +530,18 @@
         },
         {
           "name": "Iscrivi Team da Squalificare a Hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"iscrizione riuscita\", function () { pm.expect(pm.response.json()).to.eql(true); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{team2Id}}" }
         },
         {
           "name": "Team iscritti all'hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(2); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/team/hackathon/{{hackathonId}}" }
         }
       ]
@@ -415,13 +551,19 @@
       "item": [
         {
           "name": "Chiudi iscrizioni (avvia hackathon)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato IN_CORSO\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_CORSO\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/avvia" }
         },
         {
           "name": "Recupera iscrizione del team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "if (body.length > 0) { pm.collectionVariables.set('iscrizioneId', body[0].id); }"
+            "if (body.length > 0) { pm.collectionVariables.set('iscrizioneId', body[0].id); }",
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
           ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni/team/{{teamId}}/iscrizioni" }
         },
@@ -429,7 +571,9 @@
           "name": "Invia Sottomissione",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('sottomissioneId', body.id);"
+            "pm.collectionVariables.set('sottomissioneId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"titolo corretto\", function () { const body = pm.response.json(); pm.expect(body.titolo).to.eql(\"Progetto Demo\"); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -440,6 +584,10 @@
         },
         {
           "name": "Aggiorna Sottomissione",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"titolo aggiornato\", function () { const body = pm.response.json(); pm.expect(body.titolo).to.eql(\"Progetto Demo v2\"); });"
+          ] } }],
           "request": {
             "method": "PUT",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -449,21 +597,35 @@
         },
         {
           "name": "Sottomissioni dell'hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni/hackathon/{{hackathonId}}" }
         },
         {
           "name": "Sottomissione del team (singola)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/sottomissioni?teamId={{teamId}}&hackathonId={{hackathonId}}" }
         },
         {
           "name": "Chiudi sottomissioni (valuta hackathon)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato IN_VALUTAZIONE\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"IN_VALUTAZIONE\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/valuta" }
         },
         {
           "name": "Assegna Valutazione (Giudice assegnato)",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('valutazioneId', body.id);"
+            "pm.collectionVariables.set('valutazioneId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test('punteggio corretto', function () { const body = pm.response.json(); pm.expect(body.punteggio).to.eql(9); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -474,6 +636,10 @@
         },
         {
           "name": "Classifica hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/classifica" }
         }
       ]
@@ -485,7 +651,9 @@
           "name": "Crea Richiesta di Supporto",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('richiestaSupportoId', body.id);"
+            "pm.collectionVariables.set('richiestaSupportoId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"esito INVIATA\", function () { const body = pm.response.json(); pm.expect(body.esito).to.eql(\"INVIATA\"); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -496,17 +664,27 @@
         },
         {
           "name": "Richieste di supporto dell'hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/supporto/hackathon/{{hackathonId}}" }
         },
         {
           "name": "Dettaglio richiesta di supporto",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/supporto/{{richiestaSupportoId}}" }
         },
         {
           "name": "Crea Segnalazione Team",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('segnalazioneId', body.id);"
+            "pm.collectionVariables.set('segnalazioneId', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"esito PENDENTE\", function () { const body = pm.response.json(); pm.expect(body.esito).to.eql(\"PENDENTE\"); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -517,17 +695,27 @@
         },
         {
           "name": "Segnalazioni dell'hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"e' un array\", function () { pm.expect(pm.response.json()).to.be.an('array').with.lengthOf.at.least(1); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/segnalazioni/hackathon/{{hackathonId}}" }
         },
         {
           "name": "Respingi Segnalazione",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"esito RESPINTA\", function () { const body = pm.response.json(); pm.expect(body.esito).to.eql(\"RESPINTA\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/segnalazioni/{{segnalazioneId}}/respingi" }
         },
         {
           "name": "Crea Segnalazione Team da Squalificare",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
             "const body = pm.response.json();",
-            "pm.collectionVariables.set('segnalazione2Id', body.id);"
+            "pm.collectionVariables.set('segnalazione2Id', body.id);",
+            "pm.test(\"status 201\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"esito PENDENTE\", function () { const body = pm.response.json(); pm.expect(body.esito).to.eql(\"PENDENTE\"); });"
           ] } }],
           "request": {
             "method": "POST",
@@ -538,6 +726,10 @@
         },
         {
           "name": "Squalifica Team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha id\", function () { const body = pm.response.json(); pm.expect(body.id).to.exist; });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/segnalazioni/{{segnalazione2Id}}/squalifica" }
         }
       ]
@@ -547,18 +739,33 @@
       "item": [
         {
           "name": "Proclama Vincitore",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"vincitore e' il team iscritto\", function () { const body = pm.response.json(); pm.expect(body.id).to.eql(parseInt(pm.collectionVariables.get('teamId'))); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/vincitore?teamId={{teamId}}" }
         },
         {
           "name": "Concludi Hackathon",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"stato CONCLUSO\", function () { const body = pm.response.json(); pm.expect(body.stato).to.eql(\"CONCLUSO\"); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/concludi" }
         },
         {
           "name": "Eroga Premio SENZA iban (atteso 400)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 400\", function () { pm.response.to.have.status(400); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/pagamenti/{{hackathonId}}/eroga" }
         },
         {
           "name": "Aggiungi IBAN al Team",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"iban salvato\", function () { const body = pm.response.json(); pm.expect(body.iban).to.eql(\"IT60X0542811101000000123456\"); });"
+          ] } }],
           "request": {
             "method": "PUT",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -568,6 +775,10 @@
         },
         {
           "name": "Eroga Premio",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 200\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"ha transazioneId\", function () { const body = pm.response.json(); pm.expect(body.transazioneId).to.exist; });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/pagamenti/{{hackathonId}}/eroga" }
         }
       ]
@@ -577,6 +788,9 @@
       "item": [
         {
           "name": "Login con password errata -> 400",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 400\", function () { pm.response.to.have.status(400); });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -586,18 +800,30 @@
         },
         {
           "name": "Hackathon inesistente -> 404",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 404\", function () { pm.response.to.have.status(404); });"
+          ] } }],
           "request": { "method": "GET", "url": "{{baseUrl}}/hackathon/999999/classifica" }
         },
         {
           "name": "Iscrizione a hackathon concluso -> 409",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 409\", function () { pm.response.to.have.status(409); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/team/iscrizioni?hackathonId={{hackathonId}}&teamId={{teamId}}" }
         },
         {
           "name": "Avvia hackathon gia' concluso -> 409",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 409\", function () { pm.response.to.have.status(409); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/hackathon/{{hackathonId}}/avvia" }
         },
         {
           "name": "Valutazione da Giudice non assegnato -> 400",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 400\", function () { pm.response.to.have.status(400); });"
+          ] } }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -607,10 +833,16 @@
         },
         {
           "name": "Utente accetta un secondo invito -> invariante 1 (409)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 409\", function () { pm.response.to.have.status(409); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/inviti/{{invitoId}}/accetta" }
         },
         {
           "name": "Assegna Giudice gia' assegnato -> 409",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test(\"status 409\", function () { pm.response.to.have.status(409); });"
+          ] } }],
           "request": { "method": "POST", "url": "{{baseUrl}}/staff/{{giudiceId}}/giudice/{{hackathonId}}" }
         }
       ]

@@ -23,6 +23,11 @@ public class StatoInIscrizione implements HackathonState{
     }
 
     @Override
+    public void verificaSottomissioniAperte(Hackathon hackathon) {
+        throw new IllegalStateException("L'hackathon non è ancora iniziato!");
+    }
+
+    @Override
     public void avviaHackathon(Hackathon hackathon) {
         if (new Date().before(hackathon.getDataInizio())) {
             throw new IllegalStateException("Non è ancora la data di inizio dell'hackathon!");

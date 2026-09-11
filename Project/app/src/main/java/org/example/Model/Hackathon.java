@@ -70,6 +70,10 @@ public class Hackathon {
         stato.iscriviTeam(this, team);
     }
 
+    public void verificaSottomissioniAperte() {
+        stato.verificaSottomissioniAperte(this);
+    }
+
     public void avviaHackathon() {
         stato.avviaHackathon(this);
     }
